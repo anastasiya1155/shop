@@ -48,11 +48,9 @@ User.hasMany(Order);
 Order.belongsToMany(Product, { through: OrderItem });
 
 sequelize
-  // .sync({ force: true })
   .sync()
-  .then(result => {
+  .then(() => {
     return User.findById(1);
-    // console.log(result);
   })
   .then(user => {
     if (!user) {
@@ -61,10 +59,9 @@ sequelize
     return user;
   })
   .then(user => {
-    // console.log(user);
     return user.createCart();
   })
-  .then(cart => {
+  .then(() => {
     app.listen(3000);
   })
   .catch(err => {
